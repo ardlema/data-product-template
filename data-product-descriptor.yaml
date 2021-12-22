@@ -6,7 +6,7 @@
   owner: {dataproduct.owner}
   owner_email: {dataproduct.owner_email}
   information_sla: {dataproduct.information_sla}
-  status: {dataproduct.status}
+  status: development
   git_repo: {dataproduct.git_repo}
   inputPorts:
     - inputPortKey: work_orders_csv_s3
