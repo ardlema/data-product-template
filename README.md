@@ -1,1 +1,5 @@
-# {dataproduct.name}
+## {dataproduct.name}
+
+### Description
+
+{dataproduct.description}

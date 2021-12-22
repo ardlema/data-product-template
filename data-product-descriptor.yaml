@@ -1,0 +1,58 @@
+  ----
+  name: {dataproduct.name}
+  domain: {dataproduct.domain}
+  description: {dataproduct.description}
+  creation_date: {dataproduct.creation_date}
+  owner: {dataproduct.owner}
+  owner_email: {dataproduct.owner_email}
+  information_sla: {dataproduct.information_sla}
+  status: {dataproduct.status}
+  git_repo: {dataproduct.git_repo}
+  inputPorts:
+    - inputPortKey: work_orders_csv_s3
+      inputPortType: S3 CSV file
+      inputPortUrl: http://s3.airbus.com/operations/work_orders/
+      inputSchemaVersion: 1.0
+      inputSchemaRequiredFields:
+        namespace: org.airbus.work_orders_input
+        type: record
+        name: WorkOrdersEntry
+        fields:
+          - name: aufnr
+            type: string
+          - name: auart
+            type: string
+          - name: stat_ord
+            type: string
+          - name: stat_ord_us
+            type: string
+          - name: matnr
+            type: string
+  outputPorts:
+    - outputPortKey: work_orders_postgresql
+      inputPortType: PostgreSQL table
+      outputSchemaVersion: 1.0
+      outputSchemaFields:
+        namespace: org.airbus.work_orders_output
+        type: record
+        name: WorkOrdersOutput
+        fields:
+          - name: aufnr
+            type: string
+          - name: auart
+            type: string
+          - name: stat_ord
+            type: string
+          - name: stat_ord_us
+            type: string
+          - name: matnr
+            type: string
+  workloads:
+    - key: work_orders_workload
+      resource_type: batch
+      type: data_pipeline
+      technology: python
+      description: 'Python script that fetches the data from the csv, go through all the elements and store them in the
+    relational table'
+      depends_on: N/A
+
